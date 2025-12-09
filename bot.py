@@ -11,7 +11,13 @@ load_dotenv()  # .env dosyasını yükle
 BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 SERVER_CODE = os.getenv("FIVEM_SERVER_CODE", "xjx5kr")
 
+# ---- INTENTS BURADA ----
 intents = discord.Intents.default()
+intents.message_content = True      # mesaj içerik izni
+intents.members = True              # kullanıcı bilgisi izni
+# Ses ile ilgili intents yok → audioop yüklenmez
+# --------------------------
+
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
@@ -45,9 +51,9 @@ def parse_identifiers(identifiers):
     return steam, discord_id
 
 
-@bot.tree.command(name="id", description="FiveM sunucusundaki ID'ye göre oyuncu bilgisi gösterir.")
+@bot.tree.command(name="oyuncu", description="FiveM sunucusundaki ID'ye göre oyuncu bilgisi gösterir.")
 @app_commands.describe(id="Sunucu içindeki oyuncu ID'si (sayı)")
-async def id(interaction: discord.Interaction, id: int):
+async def oyuncu(interaction: discord.Interaction, id: int):
     await interaction.response.defer()
 
     players = await fetch_players()
