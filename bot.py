@@ -15,6 +15,7 @@ SERVER_CODE = os.getenv("FIVEM_SERVER_CODE", "xjx5kr")
 intents = discord.Intents.default()
 intents.message_content = True      # mesaj içerik izni
 intents.members = True              # kullanıcı bilgisi izni
+intents.voice = False
 # Ses ile ilgili intents yok → audioop yüklenmez
 # --------------------------
 
@@ -98,3 +99,4 @@ if __name__ == "__main__":
         print("Hata: DISCORD_BOT_TOKEN .env içinde yok.")
     else:
         bot.run(BOT_TOKEN)
+
